@@ -51,14 +51,14 @@ public class MemberApiController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
     }
 
-    @GetMapping("/users/{memberNo}")
+    @GetMapping("/members/{memberNo}")
     @PreAuthorize("@memberService.isAdminOrSelf(#memberNo)")
     public FindMemberResponse findMember(@PathVariable long memberNo) {
 
         return modelMapper.map(memberService.findByMemberNo(memberNo), FindMemberResponse.class);
     }
 
-    @PutMapping("/users/{memberNo}")
+    @PutMapping("/members/{memberNo}")
     @PreAuthorize("@memberService.isAdminOrSelf(#memberNo)")
     public void editMemberInfo(@RequestBody EditMemberInfoRequest request,
                              @PathVariable long memberNo) {
@@ -66,7 +66,7 @@ public class MemberApiController {
         memberService.editMember(memberNo, modelMapper.map(request, Member.class));
     }
 
-    @DeleteMapping("/users/{memberNo}")
+    @DeleteMapping("/members/{memberNo}")
     @PreAuthorize("@memberService.isAdminOrSelf(#memberNo)")
     public void removeMember(@PathVariable long memberNo) {
 

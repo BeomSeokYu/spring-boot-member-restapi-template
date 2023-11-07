@@ -25,16 +25,16 @@ public class MemberService {
 
     public Member login(String memberId, String memberPw) {
         Member member = memberRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.user.invalid")));
+                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.member.invalid")));
         if (!getBCryptPasswordEncoder().matches(memberPw, member.getPassword())) {
-            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.user.password-mismatch"));
+            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.member.password-mismatch"));
         }
         return member;
     }
 
     public Long signup(Member member) {
         if (memberRepository.findByMemberId(member.getMemberId()).isPresent()) {
-            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.user.id-already-exists"));
+            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.member.id-already-exists"));
         }
         try {
             return memberRepository.save(Member.builder()
@@ -46,7 +46,7 @@ public class MemberService {
                     .build()).getMemberNo();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.user.registration-fail"));
+            throw new CustomException(MessageUtil.getMessage(messageSource, "exception.member.registration-fail"));
         }
 
     }
@@ -60,18 +60,18 @@ public class MemberService {
 
     public Member findByMemberNo(long memberNo) {
         return memberRepository.findByMemberNo(memberNo)
-                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.user.not-found")));
+                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.member.not-found")));
     }
 
     public Member findByMemberId(String memberId) {
         return memberRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.user.not-found")));
+                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.member.not-found")));
     }
 
     @Transactional
     public Member editMember(long memberNo, Member requestMember) {
         Member member = memberRepository.findByMemberNo(memberNo)
-                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.user.not-found")));
+                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.member.not-found")));
 
         member.update(
                 requestMember.getMemberName(),
@@ -106,7 +106,7 @@ public class MemberService {
 
     private boolean isSelf(long memberNo, Authentication authentication) {
         Member member = memberRepository.findByMemberNo(memberNo)
-                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.user.not-found")));
+                .orElseThrow(() -> new CustomException(MessageUtil.getMessage(messageSource, "exception.member.not-found")));
         return member.getMemberId().equals(authentication.getName()); // 로그인된 회원 아이디와 memberNo으로 조회한 회원 아이디가 동일한지 확인
     }
 

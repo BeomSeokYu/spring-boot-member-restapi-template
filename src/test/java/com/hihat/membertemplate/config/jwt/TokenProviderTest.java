@@ -82,7 +82,7 @@ class TokenProviderTest {
     void getAuthentication() {
         // given
         Member testMember = createMember();
-//        userRepository.save(testMember);    // data.sql로 처리
+//        memberRepository.save(testMember);    // data.sql로 처리
         String token = tokenProvider.generateToken(testMember, Duration.ofMinutes(60));
 
         // when

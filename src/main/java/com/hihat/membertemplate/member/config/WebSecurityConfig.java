@@ -31,13 +31,13 @@ public class WebSecurityConfig {
 
     private static final String[] PERMIT_ALL_PATTERNS = new String[] {
             "/token",
-            "/users/login",
-            "/users/signup",
-            "/users/logout"
+            "/members/login",
+            "/members/signup",
+            "/members/logout"
     };
 
     private static final String[] AUTHENTICATED_PATTERNS = new String[] {
-            "/users/**",
+            "/members/**",
             "/"
     };
 

@@ -169,7 +169,7 @@ class MemberApiControllerTest {
     @DisplayName("findMember(): 회원 조회 - 본인 정보 조회")
     void findMember() throws Exception {
         // given
-        final String url = "/users/{memberNo}";
+        final String url = "/members/{memberNo}";
         Member me = member1;
 
         // when
@@ -185,7 +185,7 @@ class MemberApiControllerTest {
     @DisplayName("editMemberInfo(): 본인 회원 정보 수정")
     void editMemberInfo() throws Exception {
         // given
-        final String url = "/users/{memberNo}";
+        final String url = "/members/{memberNo}";
         final String tel = "000-0000-0000";
         Member me = member1;
         final EditMemberInfoRequest editMemberInfoRequest = new EditMemberInfoRequest(
@@ -213,7 +213,7 @@ class MemberApiControllerTest {
     @DisplayName("removeMember(): 회원 탈퇴(삭제)")
     void removeMember() throws Exception {
         // given
-        final String url = "/users/{memberNo}";
+        final String url = "/members/{memberNo}";
         final String delMemberId = "duser";
         Member tempMember = Member.builder()
                 .memberId(delMemberId)
