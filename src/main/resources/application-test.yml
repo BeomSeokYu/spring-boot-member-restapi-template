@@ -1,0 +1,26 @@
+spring:
+
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true    # check query
+        format_sql: true  # prettier query
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+
+  messages:
+    basename: msg/messages, msg/exceptions
+    encoding: UTF-8
+    alwaysUseMessageFormat: true
+
+jwt:
+  issuer: ${ISSUER}
+  secret-key: ${SECRET_KEY}

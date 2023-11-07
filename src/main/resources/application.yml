@@ -1,0 +1,34 @@
+spring:
+
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true    # check query
+        format_sql: true  # prettier query
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+
+  messages:
+    basename: msg/messages, msg/exceptions
+    encoding: UTF-8
+    alwaysUseMessageFormat: true
+
+jwt:
+  issuer: ${ISSUER}
+  secret-key: ${SECRET_KEY}
+
+token:
+  access-token-exp-time: 1
+  refresh-token-exp-time: 24
+  refresh-token-cookie-name: refresh_token
+
+server:
+  error:
+    include-stacktrace: never   # Hiding Response traces
